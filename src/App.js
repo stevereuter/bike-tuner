@@ -1,5 +1,4 @@
 import { useState } from "react";
-import logo from "./images/48.png";
 import {
     getCircumference,
     getHighDifference,
@@ -7,6 +6,7 @@ import {
     getLowDifference,
     getRatio,
 } from "./helpers";
+import { Details, Footer, Header, Instructions } from "./components";
 
 function App() {
     const [storedTune, setStoredTune] = useState({
@@ -41,20 +41,13 @@ function App() {
 
     return (
         <div className="p-5 bg-gray-900 text-white h-screen">
-            <header className="flex items-center gap-3 pb-5">
-                <img src={logo} alt="Strava" />
-                <h1 className="text-3xl">Bike Tuner</h1>
-            </header>
+            <Header />
             <main>
-                <p className="pb-5">
-                    For seeing how different wheel and gear combinations affect
-                    the speed of your bike. You can swap between two different
-                    combinations and see the difference.
-                </p>
+                <Details />
                 <div className="flex items-stretch gap-8 pb-5">
                     <div className="flex gap-3 flex-col">
                         <label className="flex flex-col gap-3 grow">
-                            <span className="text-xl">Wheel size</span>
+                            <h2 className="text-xl">Wheel size</h2>
                             <select
                                 className={inputClasses}
                                 value={currentTune.wheelDiameter}
@@ -82,7 +75,7 @@ function App() {
                         </span>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <h2>Lowest Gear</h2>
+                        <h2 className="text-xl">Lowest Gear</h2>
                         <label className="flex gap-3 justify-between">
                             Front
                             <input
@@ -127,7 +120,7 @@ function App() {
                         </span>
                     </div>
                     <div className="flex flex-col gap-3">
-                        <h2>Highest Gear</h2>
+                        <h2 className="text-xl">Highest Gear</h2>
                         <label className="flex gap-3 justify-between">
                             Front
                             <input
@@ -172,7 +165,7 @@ function App() {
                         </span>
                     </div>
                     <div className="flex flex-col justify-between gap-3">
-                        <h2>Difference IPR</h2>
+                        <h2 className="text-xl">Difference IPR</h2>
                         <span>Low</span>
                         <span className="text-3xl text-center">
                             {getLowDifference(storedTune, currentTune) > 0
@@ -195,7 +188,7 @@ function App() {
                         </span>
                     </div>
                     <div className="flex flex-col gap-3 justify-between">
-                        Top Speed
+                        <h2 className="text-xl">Top Speed</h2>
                         <span className="text-3xl text-center">
                             {currentTopSpeed > storedTopSpeed ? "+" : ""}
                             {(currentTopSpeed - storedTopSpeed).toFixed(2)} MPH
@@ -223,46 +216,9 @@ function App() {
                         Swap
                     </button>
                 </div>
-                <div className="text-sm pt-5">
-                    IPR - Inches Per Revolution
-                    <br />
-                    Top Speed is base on comfatable crusing speed of 22mph using
-                    44 chaining, 13 cassette, and 26" wheels.
-                </div>
+                <Instructions />
             </main>
-            <footer className="absolute bottom-5 text-center w-full">
-                <a
-                    style={{
-                        display: "inline-block",
-                        "background-color": "#FC5200",
-                        color: "#fff",
-                        padding: "5px 10px 5px 30px",
-                        "font-size": "11px",
-                        "font-family": "Helvetica, Arial, sans-serif",
-                        "white-space": "nowrap",
-                        "text-decoration": "none",
-                        "background-repeat": "no-repeat",
-                        "background-position": "10px center",
-                        "border-radius": "3px",
-                        "background-image":
-                            "url('https://badges.strava.com/logo-strava-echelon.png')",
-                    }}
-                    href="https://strava.com/athletes/143939440"
-                    target="_clean"
-                >
-                    Follow me on
-                    <img
-                        src="https://badges.strava.com/logo-strava.png"
-                        alt="Strava"
-                        style={{
-                            "margin-left": "2px",
-                            "vertical-align": "text-bottom",
-                        }}
-                        height={13}
-                        width={51}
-                    />
-                </a>{" "}
-            </footer>
+            <Footer />
         </div>
     );
 }
