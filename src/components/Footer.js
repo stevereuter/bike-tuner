@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
     return (
-        <footer className="absolute bottom-5 text-center w-full">
+        <footer className="text-center w-full">
             <a
                 style={{
                     display: "inline-block",

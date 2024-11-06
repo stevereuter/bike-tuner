@@ -37,3 +37,13 @@ export function getHighDifference(stored, currentTune) {
     );
     return currentIPR - storedIPR;
 }
+
+export function getSpeed(tune) {
+    return (
+        getInchesPerRevolution(
+            tune.wheelDiameter,
+            tune.highGearFront,
+            tune.highGearBack
+        ) / 12.566370614359173
+    );
+}
