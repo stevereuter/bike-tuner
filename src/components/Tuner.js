@@ -1,4 +1,10 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faFloppyDisk,
+    faDownload,
+    faArrowsRotate,
+} from "@fortawesome/free-solid-svg-icons";
 import {
     getCircumference,
     getHighDifference,
@@ -17,14 +23,18 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
     const storedTopSpeed = getSpeed(storedTune);
 
     const inputClasses =
-        "bg-[#FC5200] text-white border border-white rounded border-1 w-20 text-right";
+        "bg-black text-white border border-white rounded border-1 w-20 text-right focus:outline focus:outline-white p-2";
+    const buttonClasses =
+        "bg-[#9E3500] text-white border border-white rounded border-1 px-8 py-2 flex gap-2 items-center focus:outline focus:outline-white";
 
     return (
         <>
             <div className="flex flex-col md:flex-row flex-wrap gap-5 md:gap-10 xl:gap-20 pb-10">
                 <div className="border-b md:border-0 pb-5 md:pb-0 flex gap-3 flex-col">
                     <label className="flex flex-col gap-3 grow">
-                        <h2 className="text-xl">Wheel size</h2>
+                        <span id="wheelSizeLabel" className="text-xl">
+                            Wheel size
+                        </span>
                         <select
                             className={inputClasses}
                             value={currentTune.wheelDiameter}
@@ -42,13 +52,17 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
                             <option value="29">29"</option>
                         </select>
                     </label>
-                    <span className="text-3xl text-center">
+                    <span
+                        className="text-3xl text-center"
+                        role="status"
+                        aria-labelledby="wheelSizeLabel wheelSizeIpr"
+                    >
                         {getCircumference(currentTune.wheelDiameter).toFixed(2)}{" "}
-                        IPR
+                        <span id="wheelSizeIpr">IPR*</span>
                     </span>
                 </div>
-                <div className="border-b md:border-0 pb-5 md:pb-0 flex flex-col gap-3">
-                    <h2 className="text-xl">Lowest Gear</h2>
+                <fieldset className="border-b md:border-0 pb-5 md:pb-0 flex flex-col gap-3">
+                    <legend className="text-xl">Lowest Gear</legend>
                     <label className="flex gap-3 justify-between">
                         Front
                         <input
@@ -77,23 +91,26 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
                             }
                         />
                     </label>
-                    <span className="text-3xl text-center">
-                        {getRatio(
-                            currentTune.lowGearFront,
-                            currentTune.lowGearBack
-                        ).toFixed(2)}
-                    </span>
-                    <span className="text-3xl text-center">
-                        {getInchesPerRevolution(
-                            currentTune.wheelDiameter,
-                            currentTune.lowGearFront,
-                            currentTune.lowGearBack
-                        ).toFixed(2)}{" "}
-                        IPR
-                    </span>
-                </div>
-                <div className="border-b md:border-0 pb-5 md:pb-0 flex flex-col gap-3">
-                    <h2 className="text-xl">Highest Gear</h2>
+                    <dl className="flex flex-col">
+                        <dt>Ratio</dt>
+                        <dd className="text-3xl text-center">
+                            {getRatio(
+                                currentTune.lowGearFront,
+                                currentTune.lowGearBack
+                            ).toFixed(2)}
+                        </dd>
+                        <dt>IPR*</dt>
+                        <dd className="text-3xl text-center">
+                            {getInchesPerRevolution(
+                                currentTune.wheelDiameter,
+                                currentTune.lowGearFront,
+                                currentTune.lowGearBack
+                            ).toFixed(2)}
+                        </dd>
+                    </dl>
+                </fieldset>
+                <fieldset className="border-b md:border-0 pb-5 md:pb-0 flex flex-col gap-3">
+                    <legend className="text-xl">Highest Gear</legend>
                     <label className="flex gap-3 justify-between">
                         Front
                         <input
@@ -122,49 +139,63 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
                             }
                         />
                     </label>
-                    <span className="text-3xl text-center">
-                        {getRatio(
-                            currentTune.highGearFront,
-                            currentTune.highGearBack
-                        ).toFixed(2)}
-                    </span>
-                    <span className="text-3xl text-center">
-                        {getInchesPerRevolution(
-                            currentTune.wheelDiameter,
-                            currentTune.highGearFront,
-                            currentTune.highGearBack
-                        ).toFixed(2)}{" "}
-                        IPR
-                    </span>
+                    <dl className="flex flex-col">
+                        <dt>Ratio</dt>
+                        <dd className="text-3xl text-center">
+                            {getRatio(
+                                currentTune.highGearFront,
+                                currentTune.highGearBack
+                            ).toFixed(2)}{" "}
+                        </dd>
+                        <dt>IPR*</dt>
+                        <dd className="text-3xl text-center">
+                            {getInchesPerRevolution(
+                                currentTune.wheelDiameter,
+                                currentTune.highGearFront,
+                                currentTune.highGearBack
+                            ).toFixed(2)}
+                        </dd>
+                    </dl>
+                </fieldset>
+                <div className="flex flex-col justify-between">
+                    <h2 className="text-xl">Difference IPR*</h2>
+                    <dl className="border-b md:border-0 pb-5 md:pb-0 flex flex-col">
+                        <dt>Low Gear</dt>
+                        <dd className="text-3xl text-center">
+                            {getLowDifference(storedTune, currentTune) > 0
+                                ? "+"
+                                : ""}
+                            {getLowDifference(storedTune, currentTune).toFixed(
+                                2
+                            )}{" "}
+                            IPR*
+                        </dd>
+                        <dt>High Gear</dt>
+                        <dd className="text-3xl text-center">
+                            {getHighDifference(storedTune, currentTune) > 0
+                                ? "+"
+                                : ""}
+                            {getHighDifference(storedTune, currentTune).toFixed(
+                                2
+                            )}{" "}
+                            IPR*
+                        </dd>
+                    </dl>
                 </div>
-                <div className="border-b md:border-0 pb-5 md:pb-0 flex flex-col justify-between gap-3">
-                    <h2 className="text-xl">Difference IPR</h2>
-                    <span>Low</span>
-                    <span className="text-3xl text-center">
-                        {getLowDifference(storedTune, currentTune) > 0
-                            ? "+"
-                            : ""}
-                        {getLowDifference(storedTune, currentTune).toFixed(2)}{" "}
-                        IPR
-                    </span>
-                    <span>High</span>
-                    <span className="text-3xl text-center">
-                        {getHighDifference(storedTune, currentTune) > 0
-                            ? "+"
-                            : ""}
-                        {getHighDifference(storedTune, currentTune).toFixed(2)}{" "}
-                        IPR
-                    </span>
-                </div>
-                <div className="border-b md:border-0 pb-5 md:pb-0 flex flex-col gap-3 justify-between">
-                    <h2 className="text-xl">Speed</h2>
-                    <span className="text-3xl text-center">
-                        {currentTopSpeed > storedTopSpeed ? "+" : ""}
-                        {(currentTopSpeed - storedTopSpeed).toFixed(2)} MPH
-                    </span>
-                    <span className="text-3xl text-center">
-                        {currentTopSpeed.toFixed(2)} MPH
-                    </span>
+                <div className="flex flex-col justify-between">
+                    <h2 className="text-xl">Speed**</h2>
+
+                    <dl className="border-b md:border-0 pb-5 md:pb-0 flex flex-col">
+                        <dt>Low Gear</dt>
+                        <dd className="text-3xl text-center">
+                            {currentTopSpeed > storedTopSpeed ? "+" : ""}
+                            {(currentTopSpeed - storedTopSpeed).toFixed(2)} MPH
+                        </dd>
+                        <dt>High Gear</dt>
+                        <dd className="text-3xl text-center">
+                            {currentTopSpeed.toFixed(2)} MPH
+                        </dd>
+                    </dl>
                 </div>
             </div>
             <div className="flex gap-3">
@@ -173,8 +204,9 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
                         setStoredTune(currentTune);
                         setTune(StorageName.Stored, currentTune);
                     }}
-                    className="bg-[#FC5200] text-white border border-white rounded border-1 px-8"
+                    className={buttonClasses}
                 >
+                    <FontAwesomeIcon icon={faDownload} />
                     Store
                 </button>
                 <button
@@ -182,8 +214,9 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
                         setCurrentTune(currentTune);
                         setTune(StorageName.Current, currentTune);
                     }}
-                    className="bg-[#FC5200] text-white border border-white rounded border-1 px-8"
+                    className={buttonClasses}
                 >
+                    <FontAwesomeIcon icon={faFloppyDisk} />
                     Save
                 </button>
                 <button
@@ -194,8 +227,9 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
                         setStoredTune(current);
                         setTune(StorageName.Stored, current);
                     }}
-                    className="bg-[#FC5200] text-white border border-white rounded border-1 px-8"
+                    className={buttonClasses}
                 >
+                    <FontAwesomeIcon icon={faArrowsRotate} />
                     Swap
                 </button>
             </div>

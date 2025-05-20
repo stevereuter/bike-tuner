@@ -4,36 +4,36 @@ export default function Footer() {
     return (
         <footer className="text-center w-full">
             <a
+                className="focus:outline focus:outline-white border border-white rounded border-1"
                 style={{
                     display: "inline-block",
-                    "background-color": "#FC5200",
-                    color: "#fff",
+                    backgroundColor: "#FC5200",
+                    color: "#000",
                     padding: "5px 10px 5px 30px",
-                    "font-size": "11px",
-                    "font-family": "Helvetica, Arial, sans-serif",
-                    "white-space": "nowrap",
-                    "text-decoration": "none",
-                    "background-repeat": "no-repeat",
-                    "background-position": "10px center",
-                    "border-radius": "3px",
-                    "background-image":
+                    fontSize: "11px",
+                    fontFamily: "Helvetica, Arial, sans-serif",
+                    whiteSpace: "nowrap",
+                    textDecoration: "none",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "10px center",
+                    borderRadius: "3px",
+                    backgroundImage:
                         "url('https://badges.strava.com/logo-strava-echelon.png')",
                 }}
                 href="https://strava.com/athletes/143939440"
-                target="_clean"
             >
                 Follow me on
                 <img
                     src="https://badges.strava.com/logo-strava.png"
                     alt="Strava"
                     style={{
-                        "margin-left": "2px",
-                        "vertical-align": "text-bottom",
+                        marginLeft: "2px",
+                        verticalAlign: "text-bottom",
                     }}
                     height={13}
                     width={51}
                 />
-            </a>{" "}
+            </a>
         </footer>
     );
 }

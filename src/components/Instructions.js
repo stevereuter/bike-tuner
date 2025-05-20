@@ -18,10 +18,10 @@ export default function Instructions() {
                 </li>
                 <li>Use swap to switch between the two configurations</li>
             </ul>
-            IPR - Inches Per Revolution (inches of wheel travel for a single
+            * Inches Per Revolution (inches of wheel travel for a single
             crank/pedal rotation)
             <br />
-            Top Speed is base on comfatable crusing speed of 22mph using 44
+            ** Top Speed is base on comfatable crusing speed of 22mph using 44
             chaining, 13 cassette, and 26" wheels.
         </div>
     );
