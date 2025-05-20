@@ -25,16 +25,14 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
     const inputClasses =
         "bg-black text-white border border-white rounded border-1 w-20 text-right focus:outline focus:outline-white p-2";
     const buttonClasses =
-        "bg-[#9E3500] text-white border border-white rounded border-1 px-8 py-2 flex gap-2 items-center focus:outline focus:outline-white";
+        "bg-[#9E3500] text-white border border-white rounded border-1 px-6 py-2 flex gap-2 items-center focus:outline focus:outline-white";
 
     return (
         <>
             <div className="flex flex-col md:flex-row flex-wrap gap-5 md:gap-10 xl:gap-20 pb-10">
                 <div className="border-b md:border-0 pb-5 md:pb-0 flex gap-3 flex-col">
                     <label className="flex flex-col gap-3 grow">
-                        <span id="wheelSizeLabel" className="text-xl">
-                            Wheel size
-                        </span>
+                        <span className="text-xl">Wheel size</span>
                         <select
                             className={inputClasses}
                             value={currentTune.wheelDiameter}
@@ -52,13 +50,9 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
                             <option value="29">29"</option>
                         </select>
                     </label>
-                    <span
-                        className="text-3xl text-center"
-                        role="status"
-                        aria-labelledby="wheelSizeLabel wheelSizeIpr"
-                    >
+                    <span className="text-3xl text-center">
                         {getCircumference(currentTune.wheelDiameter).toFixed(2)}{" "}
-                        <span id="wheelSizeIpr">IPR*</span>
+                        <span>IPR*</span>
                     </span>
                 </div>
                 <fieldset className="border-b md:border-0 pb-5 md:pb-0 flex flex-col gap-3">
