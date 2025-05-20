@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/bike-tuner/static/css/main.0b668ede.css",
-    "main.js": "/bike-tuner/static/js/main.f42c2275.js",
+    "main.css": "/bike-tuner/static/css/main.5a37d7c8.css",
+    "main.js": "/bike-tuner/static/js/main.e45d6594.js",
     "static/js/453.3b3299fc.chunk.js": "/bike-tuner/static/js/453.3b3299fc.chunk.js",
     "index.html": "/bike-tuner/index.html",
-    "main.0b668ede.css.map": "/bike-tuner/static/css/main.0b668ede.css.map",
-    "main.f42c2275.js.map": "/bike-tuner/static/js/main.f42c2275.js.map",
+    "main.5a37d7c8.css.map": "/bike-tuner/static/css/main.5a37d7c8.css.map",
+    "main.e45d6594.js.map": "/bike-tuner/static/js/main.e45d6594.js.map",
     "453.3b3299fc.chunk.js.map": "/bike-tuner/static/js/453.3b3299fc.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0b668ede.css",
-    "static/js/main.f42c2275.js"
+    "static/css/main.5a37d7c8.css",
+    "static/js/main.e45d6594.js"
   ]
 }
