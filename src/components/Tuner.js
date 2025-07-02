@@ -180,7 +180,7 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
                     <h2 className="text-xl">Speed**</h2>
 
                     <dl className="border-b md:border-0 pb-5 md:pb-0 flex flex-col">
-                        <dt>Low Gear</dt>
+                        <dt>Difference</dt>
                         <dd className="text-3xl text-center">
                             {currentTopSpeed > storedTopSpeed ? "+" : ""}
                             {(currentTopSpeed - storedTopSpeed).toFixed(2)} MPH
