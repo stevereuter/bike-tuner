@@ -7,11 +7,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {
     getCircumference,
-    getHighDifference,
     getInchesPerRevolution,
-    getLowDifference,
     getRatio,
-    getSpeed,
+    getSpeedHigh,
+    getSpeedLow,
     setTune,
     StorageName,
 } from "../service";
@@ -19,8 +18,10 @@ import {
 export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
     const [storedTune, setStoredTune] = useState(storedTuneSaved);
     const [currentTune, setCurrentTune] = useState(currentTuneSaved);
-    const currentTopSpeed = getSpeed(currentTune);
-    const storedTopSpeed = getSpeed(storedTune);
+    const currentSpeedHigh = getSpeedHigh(currentTune);
+    const storedSpeedHigh = getSpeedHigh(storedTune);
+    const currentSpeedLow = getSpeedLow(currentTune);
+    const storedSpeedLow = getSpeedLow(storedTune);
 
     const inputClasses =
         "bg-black text-white border border-white rounded border-1 w-20 text-right focus:outline focus:outline-white p-2";
@@ -152,42 +153,34 @@ export default function Tuner({ storedTuneSaved, currentTuneSaved }) {
                     </dl>
                 </fieldset>
                 <div className="flex flex-col justify-between">
-                    <h2 className="text-xl">Difference IPR*</h2>
+                    <h2 className="text-xl">Speed**</h2>
+
                     <dl className="border-b md:border-0 pb-5 md:pb-0 flex flex-col">
                         <dt>Low Gear</dt>
                         <dd className="text-3xl text-center">
-                            {getLowDifference(storedTune, currentTune) > 0
-                                ? "+"
-                                : ""}
-                            {getLowDifference(storedTune, currentTune).toFixed(
-                                2
-                            )}{" "}
-                            IPR*
+                            {currentSpeedLow.toFixed(2)} MPH
                         </dd>
                         <dt>High Gear</dt>
                         <dd className="text-3xl text-center">
-                            {getHighDifference(storedTune, currentTune) > 0
-                                ? "+"
-                                : ""}
-                            {getHighDifference(storedTune, currentTune).toFixed(
-                                2
-                            )}{" "}
-                            IPR*
+                            {currentSpeedHigh.toFixed(2)} MPH
                         </dd>
                     </dl>
                 </div>
                 <div className="flex flex-col justify-between">
-                    <h2 className="text-xl">Speed**</h2>
-
+                    <h2 className="text-xl">Difference</h2>
                     <dl className="border-b md:border-0 pb-5 md:pb-0 flex flex-col">
-                        <dt>Difference</dt>
+                        <dt>Low Gear</dt>
                         <dd className="text-3xl text-center">
-                            {currentTopSpeed > storedTopSpeed ? "+" : ""}
-                            {(currentTopSpeed - storedTopSpeed).toFixed(2)} MPH
+                            {currentSpeedLow > storedSpeedLow ? "+" : ""}
+                            {(currentSpeedLow - storedSpeedLow).toFixed(2)} MPH
                         </dd>
                         <dt>High Gear</dt>
                         <dd className="text-3xl text-center">
-                            {currentTopSpeed.toFixed(2)} MPH
+                            {currentSpeedHigh > storedSpeedHigh ? "+" : ""}
+                            {(currentSpeedHigh - storedSpeedHigh).toFixed(
+                                2
+                            )}{" "}
+                            MPH
                         </dd>
                     </dl>
                 </div>
